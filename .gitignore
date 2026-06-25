@@ -1,0 +1,52 @@
+# ── Python ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Virtual Environments ───────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ── IDE / Editor ───────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ── YOLO Model Weights (large binary files) ───────
+models/*.pt
+output/models/*.pt
+runs/*/weights/
+
+# ── Runtime Output ─────────────────────────────────
+output/snapshots/
+output/logs/*.json
+
+# ── Test / Temp Videos ─────────────────────────────
+*.mp4
+*.avi
+*.mkv
+*.mov
+
+# ── Temporary / Scratch Files ──────────────────────
+temp.py
+temp_*.py
+scratch/
+*.tmp
+
+# ── Jupyter Notebooks checkpoints ──────────────────
+.ipynb_checkpoints/
+
+# ── OS Files ───────────────────────────────────────
+.DS_Store
+Desktop.ini

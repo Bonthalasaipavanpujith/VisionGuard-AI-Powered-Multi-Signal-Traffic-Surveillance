@@ -1,0 +1,114 @@
+alerts:
+  bot_token: YOUR_BOT_TOKEN_HERE
+  chat_id: 'YOUR_CHAT_ID_HERE'
+  cooldown_seconds: 30
+  enable_telegram: true
+  min_severity_to_alert: Moderate
+
+models:
+  yoloa: models/yoloa_best.pt
+  yolob: models/yolob_best.pt
+
+detection:
+  iou_threshold: 0.35
+  max_detections: 50
+  yoloa_confidence: 0.30
+  yolob_confidence: 0.50
+
+pipeline:
+  detect_interval: 3
+  target_fps: 15
+  use_threading: true
+  log_minor: false
+  display_width: 1280
+  display_height: 720
+  queue_size: 16
+  show_optical_flow: false
+  show_tracks: true
+
+motion_gate:
+  history: 200
+  var_threshold: 50
+  min_motion_ratio: 0.002
+  min_contour_area: 500
+
+tracking:
+  algorithm: bytetrack
+  high_conf_threshold: 0.5
+  low_conf_threshold: 0.3
+  max_lost_frames: 20
+  min_hits: 3
+  iou_match_threshold: 0.7
+  velocity_smoothing_alpha: 0.3
+  use_kalman: true
+  lk_window_size: 15
+  lk_max_level: 2
+  lk_max_corners: 100
+  min_lk_points: 3
+  history_length: 30
+
+anomaly:
+  min_frames_before_detect: 8
+  min_historical_max_speed: 0.8
+  speed_drop_rolling_start: -10
+  speed_drop_rolling_end: -2
+  min_rolling_avg_speed: 0.8
+  speed_drop_heavy_ratio: 0.30
+  speed_drop_moderate_ratio: 0.55
+  trajectory_deviation_deg: 45.0
+  incoherence_threshold: 40.0
+  min_speed_for_signals: 0.8
+  consecutive_frames_required: 1
+  overlap_iou_threshold: 0.30
+  overlap_pair_cooldown: 20
+  event_cooldown_frames: 15
+  global_events_per_second: 5
+  motorcycle_min_ratio: 0.7
+  motorcycle_history_frames: 8
+
+severity:
+  minor_max: 3
+  moderate_max: 6
+  severe_max: 10
+  persistence_bonus_frames: 3
+  persistence_bonus_score: 2
+  scores:
+    speed_drop_heavy: 3
+    speed_drop_moderate: 1
+    trajectory_deviation: 3
+    crashed_vehicle_yolo: 4
+    fire_detected: 5
+    smoke_detected: 3
+    vehicle_overlap: 3
+    flow_incoherence: 1
+    motorcycle_track_lost: 4
+    persistence_bonus: 2
+
+hazard_detector:
+  cache_ttl_frames: 5
+  roi_expand_px: 50
+  confidence: 0.50
+  iou: 0.45
+
+preprocessing:
+  adaptive: true
+  brightness_fog_threshold: 160
+  dark_channel_fog_threshold: 0.08
+  contrast_clahe_threshold: 35
+  rain_streak_threshold: 0.3
+  dcp_patch_size: 7
+  dcp_omega: 0.95
+  dcp_t_min: 0.1
+  clahe_clip_limit: 2.0
+  clahe_tile_size: 8
+  rain_temporal_frames: 3
+
+reporting:
+  log_filename: events.json
+  logs_dir: output/logs
+  output_dir: output
+  save_snapshot_on:
+    - Moderate
+    - Severe
+    - Critical
+  snapshots_dir: output/snapshots

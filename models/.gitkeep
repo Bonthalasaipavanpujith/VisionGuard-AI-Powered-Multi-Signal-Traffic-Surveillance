@@ -1,0 +1,4 @@
+# This file exists to preserve the directory structure in git.
+# Place your YOLO model weights here:
+#   - yoloa_best.pt (Vehicle Detection)
+#   - yolob_best.pt (Hazard Detection)
